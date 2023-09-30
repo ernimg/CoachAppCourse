@@ -6,7 +6,14 @@ const store = createStore({
         coachesMod: Coaches
     },
     state() {
-
+        return {
+            userId: 'C4',
+        }
+    },
+    getters: {
+        userId(state) {
+            return state.userId;
+        }
     }
 })
 
