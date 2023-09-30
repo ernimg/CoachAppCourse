@@ -1,7 +1,7 @@
 <template>
   <base-card>
     <h2>Register as a Coach</h2>
-    <register-form></register-form>
+    <register-form @save-data="saveData"></register-form>
   </base-card>
 </template>
 <script>
@@ -11,6 +11,12 @@ export default {
   components: {
     RegisterForm,
     BaseCard,
+  },
+  methods: {
+    saveData(data) {
+      this.$store.dispatch('coachesMod/addCoach', data);
+      this.$router.back('/coaches');
+    },
   },
 };
 </script>
