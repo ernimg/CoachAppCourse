@@ -35,14 +35,13 @@ export default {
         return;
       }
 
-      // if (!this.isValidF) return;
       console.log('przeszło walidacje');
       const userMessage = {
         coachId: this.$route.params.id,
-        email: this.email,
+        userEmeail: this.email,
         message: this.message,
       };
-      this.$store.dispatch[('requests/addRequest', userMessage)];
+      this.$store.dispatch('requests/addUserRequest', userMessage);
       this.$router.replace('/coaches');
     },
   },
