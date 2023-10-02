@@ -32,7 +32,6 @@ export default {
   },
   computed: {
     fullName() {
-      console.log(this.selectedCoach.firstName, this.selectedCoach.lastName);
       return this.selectedCoach.firstName + ' ' + this.selectedCoach.lastName;
     },
     ratePerHour() {

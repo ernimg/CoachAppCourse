@@ -35,7 +35,6 @@ export default {
         return;
       }
 
-      console.log('przeszło walidacje');
       const userMessage = {
         coachId: this.$route.params.id,
         userEmeail: this.email,

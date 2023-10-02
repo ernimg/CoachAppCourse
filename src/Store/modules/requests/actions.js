@@ -7,6 +7,5 @@ export default {
             message: payload.message
         }
         context.commit('addRequest', newRequests)
-        console.log('wysłano wiadomość');
     }
 }

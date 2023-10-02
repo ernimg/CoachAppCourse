@@ -1,13 +1,25 @@
 export default {
-    addCoach(context, data) {
+    async addCoach(context, data) {
+        const userId = context.rootState.userId
         const coachData = {
-            id: context.rootState.userId,
             firstName: data.first,
             lastName: data.last,
             description: data.desc,
             hourlyRate: data.rate,
             areas: data.areas
         };
-        context.commit('addCoach', coachData);
+
+        const response = fetch(`https://coaches-fcc6a-default-rtdb.firebaseio.com/coaches/${userId}.json`, {
+            method: 'PUT',
+            body: JSON.stringify(coachData)
+        })
+        if ((await response).status != 200) {
+            console.log(response)
+        }
+
+        context.commit('addCoach', {
+            ...coachData,
+            id: userId
+        });
     }
 };
