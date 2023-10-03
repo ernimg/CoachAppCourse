@@ -5,7 +5,7 @@
   <section>
     <base-card>
       <div class="controls">
-        <base-button mode="outline">Refres</base-button>
+        <base-button @click="loadCoaches" mode="outline">Refres</base-button>
         <base-button v-if="!isCoach" link to="/register"
           >Register as Coach</base-button
         >
@@ -70,6 +70,12 @@ export default {
     setFilter(updateFilters) {
       this.activeFilter = updateFilters;
     },
+    loadCoaches() {
+      this.$store.dispatch('coachesMod/loadCoaches');
+    },
+  },
+  created() {
+    this.loadCoaches();
   },
 };
 </script>
