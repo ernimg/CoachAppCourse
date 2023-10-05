@@ -1,37 +1,39 @@
 <template>
-  <base-dialog :show="!!err" title="An error occurred!" @close="handleErr">
-    <p>{{ err }}</p>
-  </base-dialog>
-  <base-card>
-    <coach-filter @change-filter="setFilter"></coach-filter>
-  </base-card>
-  <section>
+  <div>
+    <base-dialog :show="!!err" title="An error occurred!" @close="handleErr">
+      <p>{{ err }}</p>
+    </base-dialog>
     <base-card>
-      <div class="controls">
-        <base-button @click="loadCoaches(true)" mode="outline"
-          >Refres</base-button
-        >
-        <base-button v-if="!isCoach && !isLoading" link to="/register"
-          >Register as Coach</base-button
-        >
-      </div>
-      <div v-if="isLoading">
-        <base-spiner></base-spiner>
-      </div>
-      <ul v-else-if="hasCoaches">
-        <coach-item
-          v-for="coach in filterdCoaches"
-          :key="coach.id"
-          :id="coach.id"
-          :first-name="coach.firstName"
-          :last-name="coach.lastName"
-          :areas="coach.areas"
-          :rate="coach.hourlyRate"
-        ></coach-item>
-      </ul>
-      <h3 v-else>No coaches found.</h3>
+      <coach-filter @change-filter="setFilter"></coach-filter>
     </base-card>
-  </section>
+    <section>
+      <base-card>
+        <div class="controls">
+          <base-button @click="loadCoaches(true)" mode="outline"
+            >Refres</base-button
+          >
+          <base-button v-if="!isCoach && !isLoading" link to="/register"
+            >Register as Coach</base-button
+          >
+        </div>
+        <div v-if="isLoading">
+          <base-spiner></base-spiner>
+        </div>
+        <ul v-else-if="hasCoaches">
+          <coach-item
+            v-for="coach in filterdCoaches"
+            :key="coach.id"
+            :id="coach.id"
+            :first-name="coach.firstName"
+            :last-name="coach.lastName"
+            :areas="coach.areas"
+            :rate="coach.hourlyRate"
+          ></coach-item>
+        </ul>
+        <h3 v-else>No coaches found.</h3>
+      </base-card>
+    </section>
+  </div>
 </template>
 <script>
 import CoachItem from '../Components/coaches/CoachItem.vue';
