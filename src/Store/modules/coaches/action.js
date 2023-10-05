@@ -22,12 +22,16 @@ export default {
             id: userId
         });
     },
-    async loadCoaches(context) {
+    async loadCoaches(context, payload) {
+
+        if (payload.forceRefresh && !context.getters.shouldUpdate) return;
+
         const response = await fetch(`https://coaches-fcc6a-default-rtdb.firebaseio.com/coaches.json`);
         const responseData = await response.json();
 
         if (!response.ok) {
-            console.log(response)
+            const error = new Error(responseData.message || 'Failed to fetch');
+            throw error;
         }
 
         const coaches = [];
@@ -45,5 +49,6 @@ export default {
         }
 
         context.commit('setCoaches', coaches)
+        context.commit('setFetchTimestamp')
     }
 };
