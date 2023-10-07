@@ -1,6 +1,6 @@
 <template>
   <section>
-    <base-dialog :show="!!err" title="An error occurred!" @close="handleCole">
+    <base-dialog :show="!!err" title="An error occurred!" @close="handlErr">
       {{ err }}
     </base-dialog>
     <base-card>
@@ -52,10 +52,11 @@ export default {
       }
       this.isLoading = false;
     },
+    handlErr() {
+      this.err = null;
+    },
   },
-  handleCole() {
-    this.err = null;
-  },
+
   created() {
     this.loadRequest();
   },
