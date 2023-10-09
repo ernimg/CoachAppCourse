@@ -5,7 +5,8 @@ export default {
             userEmeail: payload.userEmeail,
             message: payload.message
         }
-        const response = await fetch(`https://coaches-fcc6a-default-rtdb.firebaseio.com/requests/${payload.coachId}.json`, {
+        const token = context.rootGeters.token;
+        const response = await fetch(`https://coaches-fcc6a-default-rtdb.firebaseio.com/requests/${payload.coachId}.json?auth=` + token, {
             method: 'POST',
             body: JSON.stringify(newRequests)
         })
@@ -22,7 +23,9 @@ export default {
     },
     async fetchRequests(context) {
         const coachId = context.rootGetters.userId;
-        const response = await fetch(`https://coaches-fcc6a-default-rtdb.firebaseio.com/requests/${coachId}.json`)
+        const token = context.rootGetters.token;
+        console.log(token);
+        const response = await fetch(`https://coaches-fcc6a-default-rtdb.firebaseio.com/requests/${coachId}.json?auth=` + token)
         const responseData = await response.json()
         if (!response.ok) {
             const error = new Error(responseData.message || 'Faild to fetch request');
