@@ -5,5 +5,8 @@ export default {
     token(state) {
         console.log(state.token)
         return state.token;
+    },
+    isAuthenticated(state) {
+        return !!state.token;
     }
 }

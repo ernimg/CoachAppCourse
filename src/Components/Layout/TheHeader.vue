@@ -3,12 +3,37 @@
     <nav>
       <h1><router-link to="/"> Find a Coach </router-link></h1>
       <ul>
-        <router-link to="/coaches">All Coachces</router-link>
-        <router-link to="/requests">Requests</router-link>
+        <li>
+          <router-link to="/coaches">All Coachces</router-link>
+        </li>
+        <li v-if="isAuth">
+          <router-link to="/requests">Requests</router-link>
+        </li>
+        <li v-else>
+          <router-link to="/auth">Login</router-link>
+        </li>
+        <li v-if="isAuth">
+          <base-button @click="logout">Logout</base-button>
+        </li>
       </ul>
     </nav>
   </header>
 </template>
+<script>
+export default {
+  computed: {
+    isAuth() {
+      return this.$store.getters.isAuthenticated;
+    },
+  },
+  methods: {
+    logout() {
+      this.$store.dispatch('logout');
+      this.$router.replace('/coaches');
+    },
+  },
+};
+</script>
 <style scoped>
 header {
   width: 100%;

@@ -50,5 +50,12 @@ export default {
             tokenExpiration: responseData.expiresIn
         });
         console.log(responseData.idToken)
+    },
+    logout(contex) {
+        contex.commit('setUser', {
+            token: null,
+            userId: null,
+            tokenExpiration: null
+        });
     }
 }

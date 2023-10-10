@@ -12,7 +12,13 @@
           <base-button @click="loadCoaches(true)" mode="outline"
             >Refres</base-button
           >
-          <base-button v-if="!isCoach && !isLoading" link to="/register"
+          <base-button link v-if="!isAuth" to="/auth?redirect=register"
+            >Login to Register as Coach</base-button
+          >
+          <base-button
+            v-if="isAuth && !isCoach && !isLoading"
+            link
+            to="/register"
             >Register as Coach</base-button
           >
         </div>
@@ -38,6 +44,7 @@
 <script>
 import CoachItem from '../Components/coaches/CoachItem.vue';
 import CoachFilter from '../Components/coaches/CoachesFilter.vue';
+import BaseButton from '../Components/UI/BaseButton.vue';
 export default {
   data() {
     return {
@@ -53,10 +60,14 @@ export default {
   components: {
     CoachItem,
     CoachFilter,
+    BaseButton,
   },
   computed: {
     isCoach() {
       return this.$store.getters['coachesMod/isCoach'];
+    },
+    isAuth() {
+      return this.$store.getters.isAuthenticated;
     },
     filterdCoaches() {
       const coaches = this.$store.getters['coachesMod/coaches'];

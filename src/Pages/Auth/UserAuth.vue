@@ -86,6 +86,7 @@ export default {
           this.email = '';
           this.password = '';
         }
+        this.$router.replace('/coaches');
       } catch (error) {
         this.isLoading = false;
         this.err = error.message || 'Failed authenticate.';
