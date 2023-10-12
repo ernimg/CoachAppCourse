@@ -86,7 +86,9 @@ export default {
           this.email = '';
           this.password = '';
         }
-        this.$router.replace('/coaches');
+        const redirectUrl = '/' + (this.$route.query.redirect||'coaches');
+        console.log(redirectUrl);
+        this.$router.replace(redirectUrl);
       } catch (error) {
         this.isLoading = false;
         this.err = error.message || 'Failed authenticate.';
