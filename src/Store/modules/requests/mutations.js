@@ -3,7 +3,6 @@ export default {
     state.request.push(payload);
   },
   setRequest(state, payload) {
-    console.log(payload);
     state.request = payload;
   },
 };

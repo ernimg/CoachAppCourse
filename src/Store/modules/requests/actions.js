@@ -14,8 +14,6 @@ export default {
       }
     );
     const responseData = await response.json();
-    console.log(`add response Data : ${responseData}`);
-    console.log(responseData);
     if (!response.ok) {
       const error = new Error(responseData.message || 'Faild to send request');
       throw error;
@@ -28,21 +26,24 @@ export default {
   async fetchRequests(context) {
     const coachId = context.rootGetters.userId;
     const token = context.rootGetters.token;
-    console.log(`tokken: ${token}`);
-    console.log(`coachId: ${coachId}`);
+    // console.log(`tokken: ${token}`);
+    // console.log(`coachId: ${coachId}`);
     const response = await fetch(
       `https://coaches-fcc6a-default-rtdb.firebaseio.com/requests/${coachId}.json?auth=` +
         token
     );
     const responseData = await response.json();
-    if (!response.status == 200) {
+    console.log(responseData);
+    if (!response.ok) {
       const error = new Error(responseData.message || 'Faild to fetch request');
       throw error;
     }
-    console.log(`responseData: ${responseData}`);
+    console.log('dalej');
+
     const requests = [];
 
     for (const key in responseData) {
+      console.log('weszło do petli');
       const request = {
         id: key,
         coachId: coachId,
@@ -50,7 +51,6 @@ export default {
         message: responseData[key].message,
       };
       requests.push(request);
-      console.log(requests);
     }
 
     context.commit('setRequest', requests);

@@ -86,8 +86,8 @@ export default {
           this.email = '';
           this.password = '';
         }
-        const redirectUrl = '/' + (this.$route.query.redirect||'coaches');
-        console.log(redirectUrl);
+        const redirectUrl = '/' + (this.$route.query.redirect || 'coaches');
+
         this.$router.replace(redirectUrl);
       } catch (error) {
         this.isLoading = false;
