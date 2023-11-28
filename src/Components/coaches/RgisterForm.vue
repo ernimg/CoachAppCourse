@@ -1,3 +1,4 @@
+,
 <template>
   <form @submit.prevent="submitForm">
     <div class="form-control" :class="{ invalid: !firstName.isVal }">
@@ -131,8 +132,8 @@ export default {
         this.formIsValid = false;
       }
       if (this.areas.val.length === 0) {
-        this.formIsValid = false;
         this.areas.isVal = false;
+        this.formIsValid = false;
       }
     },
     submitForm() {
